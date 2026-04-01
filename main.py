@@ -7,7 +7,7 @@ years="1.2 1.4 1.6 2.1 2.3 3 3.1 3.3 3.3 3.8 4 4.1 4.1 4.2 4.6 5 5.2 5.4 6 6.1 6
 
 years = [float(x.replace(",", ".")) for x in years]
 
-x = np.array([years]).reshape(1, -1)
+x = np.array([years]).reshape(-1, 1)
 
 
 salary="""39344
@@ -45,6 +45,11 @@ salary="""39344
 
 salary = [float(x.replace(",", ".")) for x in salary]
 
+y = salary
+
+
+
+print("x shape", x.shape)
 
 # this instantiates the linear regression object
 
@@ -60,7 +65,7 @@ fit calculates m and b
 '''
 
 
-y = np.array([salary]).reshape(1, -1)
+
 
 
 preds= lr.fit(x, y)
@@ -71,7 +76,8 @@ b = lr.intercept_ # intercept
 print("m:", m)
 print("b:", b)
 
-a = np.full((1, 30), 1.5)
+# Predict for 1.5 years (one sample, one feature)
+a = np.array([[1.5]])
 
 o=lr.predict(a)
 
